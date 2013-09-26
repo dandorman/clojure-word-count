@@ -1,8 +1,7 @@
 (ns phrase
-  (:use [clojure.string :only [lower-case split]]))
+  (:require [clojure.string :refer [lower-case]]))
 
 (defn word-count
   [string]
-  (let [normalized-string (clojure.string/replace (lower-case string) #"[^a-z0-9 ]" "")
-        words (split normalized-string #"\s+")]
+  (let [words (re-seq #"\w+" (lower-case string))]
     (frequencies words)))
